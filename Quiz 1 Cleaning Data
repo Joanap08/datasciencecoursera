@@ -16,7 +16,7 @@ length(remna) ## now the number of properties.
 ##Consider the variable FES in the code book. 
 ##Which of the "tidy data" principles does this variable violate? Each tidy data table contains information about only one type of observation.
 
-fes<- house$FES ## not sure about the answer 
+fes<- house$FES ## RIGHT ANSWER tidy data has one variable per column…
 
 ## Question 3
 ##read excel
@@ -35,5 +35,19 @@ sum(gas$Zip*gas$Ext,na.rm=T)
 install.packages("XML")
 library(XML)
 
-xmlink<-"https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Frestaurants.xml"
-xmlrest<- xmlTreeParse(xmlink)
+fileurl<-"http://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Frestaurants.xml"
+doc <- xmlTreeParse(fileurl,useInternal=TRUE)
+rootNode<-xmlRoot(doc)
+xmlName(rootNode)
+
+##zipcode <- xpathSApply(root.Node, "//zipcode", xmlValue)
+##length(zipcode[zipcode==21231])
+
+## Question5 
+
+## read csv
+install.packages("RCurl")
+library(RCurl)
+options(RCurlOptions = list(cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl")))   
+URL <- "https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Fss06hid.csv"
+x <- getURL(URL)
