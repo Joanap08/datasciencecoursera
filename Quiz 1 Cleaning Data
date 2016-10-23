@@ -1,4 +1,5 @@
 ## Quizz 1 Getting data clean
+##read.csv
 getwd()
 setwd ("C://Users//jpinto//Desktop//ExternalWork//Rprog")
 
@@ -10,3 +11,29 @@ class(value) ##integer
 high <-value[value >= 24] ##find all the ones with code 24  which is 10000000
 remna <-high[!is.na(high)] ## remove all the NA
 length(remna) ## now the number of properties.
+
+## Question 2
+##Consider the variable FES in the code book. 
+##Which of the "tidy data" principles does this variable violate? Each tidy data table contains information about only one type of observation.
+
+fes<- house$FES ## not sure about the answer 
+
+## Question 3
+##read excel
+getwd()
+install.packages("xlxs")
+library(xlsx)
+gas<- read.xlsx ("C://Users//jpinto//Desktop//ExternalWork//Rprog//gas.xlsx", sheetIndex = 1, header = TRUE)
+
+## extract the Read rows 18-23 and columns 7-15
+
+gas<- read.xlsx ("C://Users//jpinto//Desktop//ExternalWork//Rprog//gas.xlsx", sheetIndex = 1, header = TRUE, rowIndex = 18:23, colIndex = 7:15)
+sum(gas$Zip*gas$Ext,na.rm=T)
+
+##Question4
+##read xml
+install.packages("XML")
+library(XML)
+
+xmlink<-"https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Frestaurants.xml"
+xmlrest<- xmlTreeParse(xmlink)
