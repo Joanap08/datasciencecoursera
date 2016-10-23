@@ -1,0 +1,12 @@
+## Quizz 1 Getting data clean
+getwd()
+setwd ("C://Users//jpinto//Desktop//ExternalWork//Rprog")
+
+house <- read.csv ("C://Users//jpinto//Desktop//ExternalWork//Rprog//data.csv", header = TRUE) ##get the data
+## First question VAL> 1000000
+value<-house$VAL ##pick up only property values
+class(value) ##integer
+
+high <-value[value >= 24] ##find all the ones with code 24  which is 10000000
+remna <-high[!is.na(high)] ## remove all the NA
+length(remna) ## now the number of properties.
