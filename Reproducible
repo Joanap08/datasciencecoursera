@@ -1,0 +1,15 @@
+#Make a plot that answers the question: what is the relationship between mean covered charges 
+#(Average.Covered.Charges) and mean total payments (Average.Total.Payments) in New York?
+
+getwd()
+setwd("C://Users//jpinto//Dropbox//Reproducible")
+
+install.packages("ggplot2")
+library(ggplot2)
+
+pay<-read.csv("payments.csv", header = TRUE)
+
+ny<-pay[pay$Provider.State =="NY",]
+
+qplot(Average.Covered.Charges,Average.Total.Payments,data=ny)
+
