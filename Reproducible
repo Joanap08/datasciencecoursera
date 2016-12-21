@@ -1,6 +1,3 @@
-#Make a plot that answers the question: what is the relationship between mean covered charges 
-#(Average.Covered.Charges) and mean total payments (Average.Total.Payments) in New York?
-
 getwd()
 setwd("C://Users//jpinto//Dropbox//Reproducible")
 
@@ -10,6 +7,23 @@ library(ggplot2)
 pay<-read.csv("payments.csv", header = TRUE)
 
 ny<-pay[pay$Provider.State =="NY",]
+total<-ny[c("Average.Total.Payments")]
+cover<-ny[c("Average.Covered.Charges")]
 
-qplot(Average.Covered.Charges,Average.Total.Payments,data=ny)
+ny1<-cbind(total,cover)
+colnames(ny1)<-c("Total","Covered")
 
+
+
+dev.new()
+png(filename =("plot.png"))
+g<-ggplot(data = ny1,aes(Total,Covered))+
+  coord_cartesian(xlim=c(0,35000),ylim = c(0,150000))
+  scale_y_continuous(limits = c(0, 150000))
+  geom_point(aes(alpha=Covered), size = 3, position="jitter")+
+  stat_smooth(method="lm", fill="black")
+dev.off()
+
+# 
+g<-ggplot(data = ny,aes(Average.Total.Payments,Average.Covered.Charges))+
+  geom_bar()
