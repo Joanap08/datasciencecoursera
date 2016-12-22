@@ -1,0 +1,28 @@
+
+#Plot 1
+
+getwd()
+setwd("C://Users//jpinto//Dropbox//Reproducible")
+
+pay<-read.csv("payments.csv", header = TRUE)
+
+ny<-pay[pay$Provider.State =="NY",]
+total<-ny[c("Average.Total.Payments")]
+cover<-ny[c("Average.Covered.Charges")]
+
+ny1<-cbind(total,cover)
+colnames(ny1)<-c("Total","Covered")
+
+pdf("1.pdf", width=15,height=7)
+plot(ny1$Total,ny1$Covered,"p",col="dark blue", xlab="Average of Total Charges (USD$)",ylab = "Average of Covered Charges (USD$)", main = "Relationship between Average Covered Charges and Average Total Charges in New York")
+abline(lm(ny1$Covered~ny1$Total),col="red")
+lines(lowess(ny1$Covered,ny1$Total),col="dark green")
+dev.off()
+
+
+#Plot2
+install.packages("car")
+library(car)
+scatterplot(Average.Covered.Charges ~ Average.Total.Payments| DRG.Definition,data=pay)
+
+http://bl.ocks.org/patilv/raw/7360425/
