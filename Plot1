@@ -21,8 +21,14 @@ dev.off()
 
 
 #Plot2
-install.packages("car")
-library(car)
-scatterplot(Average.Covered.Charges ~ Average.Total.Payments| DRG.Definition,data=pay)
+#Plot2
+plot(pay$Average.Total.Payments,pay$Average.Covered.Charges,
+     col=pay$DRG.Definition,
+     pch=16,
+     cex=0.5,
+     xlab = "Average of Total Charges (USD$)",
+     ylab = "Average of Covered Charges (USD$)",
+     main = "Relationship between Average Covered Charges and Average Total Charges by medical condition")
+legend(x = 150000, y = 600000, legend = levels(pay$DRG.Definition), col = c(1:5), pch = 16)
 
 http://bl.ocks.org/patilv/raw/7360425/
