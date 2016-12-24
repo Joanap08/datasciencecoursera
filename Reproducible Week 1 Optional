@@ -1,4 +1,3 @@
-
 #Plot 1
 
 getwd()
@@ -21,7 +20,8 @@ dev.off()
 
 
 #Plot2
-#Plot2
+pdf(file = "Plot2.pdf")
+levels(pay$DRG.Definition)<-c("Pneumonia","Heart Failure","Esophagitis","Nutrition Disorders","Kidney&Urinary","Septicemia")
 plot(pay$Average.Total.Payments,pay$Average.Covered.Charges,
      col=pay$DRG.Definition,
      pch=16,
@@ -29,6 +29,5 @@ plot(pay$Average.Total.Payments,pay$Average.Covered.Charges,
      xlab = "Average of Total Charges (USD$)",
      ylab = "Average of Covered Charges (USD$)",
      main = "Relationship between Average Covered Charges and Average Total Charges by medical condition")
-legend(x = 150000, y = 600000, legend = levels(pay$DRG.Definition), col = c(1:5), pch = 16)
-
-http://bl.ocks.org/patilv/raw/7360425/
+legend(x = 3000, y = 220000, legend = levels(pay$DRG.Definition),col=(1:6),pch = 16)
+dev.off()
